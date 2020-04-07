@@ -10,9 +10,10 @@ class ProductsControler extends Controller
     public function index ($id) {
 
        $products = Product::paginate(15);
-//       dd($products);
        $product = Product::find($id);
-//       dd($product->getPrice('1000', '10'));
+//       $user = $product->author->name;
+//       dd($product->author->name);
+
         return view('pages.productCart',['product' => $product, 'products' => $products]);
     }
 }

@@ -54,14 +54,15 @@
                    <div class="my-4">
                        <div class="text-uppercase text-center mb-4" style="font-size: 20px;"> Информация о продавце </div>
                        <ul class="text-muted mp-0">
-                           <li> Внутренний рынок, Джунхай, Полход2, контейнер7</li>
-                           <li> Иванов Иван Иванович</li>
-                           <li>+7554556454563</li>
+                           <li> {{$product->author->address}} </li>
+                           <li> {{$product->author->name}} </li>
+                           <li> {{$product->author->phone}} </li>
                        </ul>
                        <div class="my-2"><span class="btn-styles px-2 text-uppercase">Написать сообщение продавцу</span> </div>
                        <div class="my-2"><span class="btn-styles px-2 text-uppercase">К магазину продавцу</span> </div>
                        <div class="my-2"><span class="btn-styles px-2 text-uppercase">Добавить в избранное</span> </div>
-                       <div class="my-2"><span class="btn-styles px-2 text-uppercase">Поделиться</span> </div>
+                       <div class="my-2" data-toggle="modal" data-target="#share"><span class="btn-styles px-2 text-uppercase">Поделиться</span> </div>
+                       <div class="my-2" data-toggle="modal" data-target="#comments"><span class="btn-styles px-2 text-uppercase">Коментарии</span> </div>
                    </div>
 
                    <div>
@@ -88,4 +89,89 @@
            </div>
        </div>
     </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="comments" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Коментарии</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li class="my-4">
+                            <div class="my-2">21.21.2222</div>
+                            <div class="">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            </div>
+                        </li>
+
+                        <li class="my-4">
+                            <div class="my-2">21.21.2222</div>
+                            <div class="">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            </div>
+                        </li>
+
+                        <li class="my-4">
+                            <div class="my-2">21.21.2222</div>
+                            <div class="">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary">Оставить коментарий</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ваш друг пролучит письмо со ссылкой на это объявление</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Ваш email:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Имя друга:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">email друга:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary">Поделиться</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 @endsection
