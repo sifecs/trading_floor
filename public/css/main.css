@@ -1,0 +1,64 @@
+.mp-0{
+    margin: 0;
+    padding: 0;
+}
+
+.btn-styles{
+    background-color: #b1b0b0;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.wrapper {
+    max-width: 1500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.mine-star{
+    position: absolute;
+    z-index: 22;
+    background-color: #e79523;
+    width: 90px;
+    height: 50px;
+    right: -50px;
+    top: 0;
+    color: white
+}
+
+.mine-title{
+    width: 350px;
+}
+
+@media (max-width: 992px) {
+    .mine-star{
+        right: -190px;
+    }
+}
+
+@media (max-width: 992px) {
+    .mine-star{
+        right: -190px;
+    }
+}
+@media (max-width: 765px) {
+    .mine-star{
+        right: -50px;
+    }
+    .mine-title{
+        width: 300px;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .mine-star{
+        right: 0;
+        top: 10px;
+    }
+
+    .mine-title{
+        width: auto;
+    }
+}
