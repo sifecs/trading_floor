@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 class ProductsControler extends Controller
 {
     public function index ($id) {
-//        Product::find($id);
-        return view('pages.productCart');
+
+       $products = Product::paginate(15);
+//       dd($products);
+       $product = Product::find($id);
+//       dd($product->getPrice('1000', '10'));
+        return view('pages.productCart',['product' => $product, 'products' => $products]);
     }
 }
