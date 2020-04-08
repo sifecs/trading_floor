@@ -1,5 +1,6 @@
 <?php
 
+use App\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
 Route::get('/createCategory', 'HomeController@createCategory');
-Route::get('/product/{id}', 'ProductsControler@index');
+Route::get('/product/{id}', 'ProductsControler@index')->name('product.show');
+
+
+Route::post('/coment', 'ComentsControler@store');
+
+
+Route::get('/ajax/Coments/{id}', 'ProductsControler@ajaxComents');
+Route::get('/ajax/Products', 'ProductsControler@ajaxProducts');
+//
+//Route::get('/ajax/Coments',function () {
+//    $products = Product::paginate('2')->render();
+//    return view::make('index')->with('coments')->render();
+//});
+
 //Route::group(['middleware' =>'auth'], function (){
 //    Route::get('/loguot', 'AuthControler@loguot');
 //    Route::get('/profile', 'profileController@index');

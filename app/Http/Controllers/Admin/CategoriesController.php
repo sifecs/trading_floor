@@ -25,6 +25,7 @@ class CategoriesController extends Controller
     }
 
     public function store (Request $request) {
+//        dd($request->ajax());
         $this->validate($request,[
             'title' =>'required',
         ]);

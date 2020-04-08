@@ -55,7 +55,7 @@
                        <div class="text-uppercase text-center mb-4" style="font-size: 20px;"> Информация о продавце </div>
                        <ul class="text-muted mp-0">
                            <li> {{$product->author->address}} </li>
-                           <li> {{$product->author->name}} </li>
+                           <li> {{$product->author->getfullname()}} </li>
                            <li> {{$product->author->phone}} </li>
                        </ul>
                        <div class="my-2"><span class="btn-styles px-2 text-uppercase">Написать сообщение продавцу</span> </div>
@@ -66,22 +66,25 @@
                    </div>
 
                    <div>
-                       <ul class="mp-0">
-                           @foreach($products as $product)
+                       <ul class="mp-0 product-mine">
+                           @foreach($products as $product_mine)
 
-                               <li class="row mb-3" style="position: relative">
-                                   <div class="col-sm-4">
-                                       <img class="img-fluid" src="  {{$product->getImages()[1]}}" >
-                                   </div>
-                                   <div class="col-sm-8">
-                                       <div class="mine-title text-uppercase" >{{$product->title}}</div>
-                                       <div class="">{{$product->getPrice($product->price, $product->discounts).'.руб'}}</div>
-                                   </div>
+                               <li class=" mb-3" style="position: relative">
+                                   <a class="row" href="{{route('product.show',  $product_mine->id )}}">
+                                       <div class="col-sm-4">
+                                           <img class="img-fluid" src="  {{$product_mine->getImages()[1]}}" >
+                                       </div>
+                                       <div class="col-sm-8">
+                                           <div class="mine-title text-uppercase"  style="color: black">{{$product_mine->title}}</div>
+                                           <div class="text-muted">{{$product_mine->getPrice($product_mine->price, $product_mine->discounts).'.руб'}}</div>
+                                       </div>
+                                   </a>
                                    <a class="mine-star" >
                                        <i class="fa fa-star-o fa-2x" aria-hidden="true" style="position: absolute; left: 5px; top: 10px;  color: white;"></i>
                                    </a>
                                </li>
                            @endforeach
+                           {{$products->links()}}
                        </ul>
                    </div>
 
@@ -103,39 +106,41 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <ul>
-                        <li class="my-4">
-                            <div class="my-2">21.21.2222</div>
-                            <div class="">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                            </div>
-                        </li>
-
-                        <li class="my-4">
-                            <div class="my-2">21.21.2222</div>
-                            <div class="">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                            </div>
-                        </li>
-
-                        <li class="my-4">
-                            <div class="my-2">21.21.2222</div>
-                            <div class="">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                                текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                            </div>
-                        </li>
+                    <ul class="coments">
+                        @foreach($product->getComments() as $comment)
+                            <li class="my-4">
+                                <div class="my-2">{{$comment->date}}</div>
+                                <div class="">{{$comment->text}}</div>
+                            </li>
+                        @endforeach
+                            {{$product->getComments()->links()}}
                     </ul>
+                    <div class="collapse" id="createComents">
+                        <div class="card card-body">
+                            <div class="error text-danger"></div>
+                            <form class="coment-form" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Текст коментария:</label>
+                                    <textarea id="text" type="text" name="text" class="form-control" id="recipient-name"> </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="form-coments-ok form-control btn-success" id="recipient-name">
+                                </div>
+                            </form>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary">Оставить коментарий</button>
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#createComents" >Оставить коментарий</button>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Modal -->
     <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
