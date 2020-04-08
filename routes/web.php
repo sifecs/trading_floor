@@ -15,15 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index');
+
 Route::get('/createCategory', 'HomeController@createCategory');
-Route::get('/product/{id}', 'ProductsControler@index')->name('product.show');
 
-
+Route::get('/product/{id}', 'ProductsControler@show')->name('product.show');
+Route::get('/products', 'ProductsControler@list')->name('products.list');
+Route::get('/products/category/{id}', 'ProductsControler@listCategory')->name('category.list');
 Route::post('/coment', 'ComentsControler@store');
 
 
-Route::get('/ajax/Coments/{id}', 'ProductsControler@ajaxComents');
-Route::get('/ajax/Products', 'ProductsControler@ajaxProducts');
+Route::group(['prefix'=>'ajax'], function (){
+    Route::get('Coments/{id}', 'ProductsControler@ajaxComents');
+    Route::get('Products', 'ProductsControler@ajaxProducts');
+});
+
 //
 //Route::get('/ajax/Coments',function () {
 //    $products = Product::paginate('2')->render();

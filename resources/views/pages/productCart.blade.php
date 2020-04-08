@@ -106,7 +106,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <ul class="coments">
+                    <ul class="coments" data = "{{$product->id}}">
                         @foreach($product->getComments() as $comment)
                             <li class="my-4">
                                 <div class="my-2">{{$comment->date}}</div>
@@ -176,7 +176,6 @@
             </div>
         </div>
     </div>
-
 
 
 @endsection

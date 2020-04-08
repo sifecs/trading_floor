@@ -1,3 +1,4 @@
+
 $(document).on('submit', function (e) {
     e.preventDefault();
 
@@ -24,7 +25,8 @@ $(document).on('submit', function (e) {
 $(document).on('click','.coments .pagination a', function (e) {
     e.preventDefault();
     let page = $(this).attr('href').split('page=')[1];
-    getAjaxDate(page,'/ajax/Coments/{{$product->id}}','coments')
+    let product_id =  $(".coments").attr('data');
+    getAjaxDate(page,`/ajax/Coments/${product_id}`,'coments')
 });
 
 $(document).on('click','.product-mine .pagination a', function (e) {
@@ -42,3 +44,5 @@ function getAjaxDate (page, url, element) {
             // console.log(data );
         });
 }
+
+

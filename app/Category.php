@@ -8,6 +8,11 @@ use Kalnoy\Nestedset\NodeTrait;
 class Category extends Model
 {
     protected $fillable = ['title','_lft', '_rgt', 'parent_id'];
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
+
     static  function add ($fields) {
 
     }

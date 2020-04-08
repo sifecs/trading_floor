@@ -24,10 +24,11 @@
 </head>
 
 <body>
+
 <nav class=" navbar-dark bg-dark">
     <ul class=" navbar-nav nav nav-pills nav-fill d-flex flex-row">
         <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link @if(Route::current()->named(['products.list', 'category.list'])) active @endif" href="{{route('products.list')}}">
                 <i class="fa fa-shopping-bag fa-3x"></i>
                 <div>Товары</div>
             </a>

@@ -13,7 +13,7 @@
                         </div>
                         <ul class="collapse ml-5" id="{{$category->title}}">
                            @foreach($category->getSubcategory($category->id) as $subcategory)
-                                <li class="my-3">{{ $subcategory-> title}}</li>
+                                <li class="my-3"><a class="" style="color: black" href="{{route('category.list', $subcategory->id)}}">{{ $subcategory-> title}} </a> </li>
                            @endforeach
                         </ul>
                    @endif
