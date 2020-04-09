@@ -21,6 +21,9 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
+    <meta http-equiv="Cache-Control" content="no-cache">
+
 </head>
 
 <body>
@@ -45,11 +48,19 @@
                 <div>Избранное </div>
             </a>
         </li>
+
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
-                <div>Мой кабинет </div>
-            </a>
+        @if(Auth::check())
+                <a class="nav-link @if(Route::current()->named(['profile'])) active @endif" href="{{route('profile')}}">
+                    <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
+                    <div>Мой кабинет </div>
+                </a>
+        @else
+                <a class="nav-link @if(Route::current()->named(['login', 'register'])) active @endif" href="{{route('login')}}">
+                    <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
+                    <div>Мой кабинет </div>
+                </a>
+        @endif
         </li>
 
     </ul>

@@ -95,7 +95,7 @@
 
 
 
-    <!-- Modal -->
+    <!-- Modal коментарии -->
     <div class="modal fade" id="comments" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -122,11 +122,11 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="product_id" value="{{$product->id}}">
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Текст коментария:</label>
-                                    <textarea id="text" type="text" name="text" class="form-control" id="recipient-name"> </textarea>
+                                    <label class="col-form-label">Текст коментария:</label>
+                                    <textarea id="text" type="text" name="text" class="form-control"> </textarea>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="form-coments-ok form-control btn-success" id="recipient-name">
+                                    <input type="submit" class="form-coments-ok form-control btn-success" id="add-coment">
                                 </div>
                             </form>
                         </div>
@@ -141,7 +141,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal поделиться -->
     <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -154,18 +154,18 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Ваш email:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label class="col-form-label">Ваш email:</label>
+                            <input type="text" class="form-control" >
                         </div>
 
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Имя друга:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label class="col-form-label">Имя друга:</label>
+                            <input type="text" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">email друга:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label class="col-form-label">email друга:</label>
+                            <input type="text" class="form-control" >
                         </div>
                     </form>
                 </div>

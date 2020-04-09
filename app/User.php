@@ -27,6 +27,32 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function shop()
+    {
+        return $this->belongsTo(Shops::class);
+    }
+
+    public static function add ($fields) {
+        $user = new static;
+        $user->fill($fields);
+        $user->save();
+
+        return $user;
+    }
+
+    public  function edit ($fields) {
+        $this->fill($fields);
+        $this->save();
+    }
+
+    public function generatePassword ($password) {
+        if ($password != null) {
+            $this->password = bcrypt($password);
+            $this->save();
+        }
+    }
+
      public function getfullname () {
        return $this->surname.' '. $this->name.' '.$this->patronymic;
      }

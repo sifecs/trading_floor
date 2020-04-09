@@ -57,6 +57,26 @@
     transition:all 0.5s;
 }
 
+.uplode-file{
+    display: inline-block;
+    cursor: pointer;
+    color: #eaa83e;
+    text-decoration: underline;
+}
+
+.delete-file {
+    text-decoration: underline;
+    color: #eaa83e;
+}
+
+.main_input_file {
+    display: none;
+}
+
+#f_name {
+    border: 0;
+}
+
 @media (max-width: 992px) {
     .mine-star{
         right: -190px;
