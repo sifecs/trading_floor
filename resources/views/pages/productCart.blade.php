@@ -49,20 +49,20 @@
                        </div>
                    </div>
 
-                   <div><span class="btn-styles px-2 text-uppercase">Забронировать товар</span> </div>
+                   <div><span class="btn-styles px-2 text-uppercase hover">Забронировать товар</span> </div>
 
                    <div class="my-4">
                        <div class="text-uppercase text-center mb-4" style="font-size: 20px;"> Информация о продавце </div>
                        <ul class="text-muted mp-0">
-                           <li> {{$product->author->address}} </li>
+                           <li> {{$product->shop->address}} </li>
                            <li> {{$product->author->getfullname()}} </li>
                            <li> {{$product->author->phone}} </li>
                        </ul>
-                       <div class="my-2"><span class="btn-styles px-2 text-uppercase">Написать сообщение продавцу</span> </div>
-                       <div class="my-2"><span class="btn-styles px-2 text-uppercase">К магазину продавцу</span> </div>
-                       <div class="my-2"><span class="btn-styles px-2 text-uppercase">Добавить в избранное</span> </div>
-                       <div class="my-2" data-toggle="modal" data-target="#share"><span class="btn-styles px-2 text-uppercase">Поделиться</span> </div>
-                       <div class="my-2" data-toggle="modal" data-target="#comments"><span class="btn-styles px-2 text-uppercase">Коментарии</span> </div>
+                       <div class="my-2"><span class="hover btn-styles px-2 text-uppercase">Написать сообщение продавцу</span> </div>
+                       <a href="{{route('shop', $product->shop_id)}}" class="my-2 hover"><span class="hover btn-styles px-2 text-uppercase">К магазину продавцу</span> </a>
+                       <div class="my-2"><span class="hover btn-styles px-2 text-uppercase">Добавить в избранное</span> </div>
+                       <div class="my-2" data-toggle="modal" data-target="#share"><span class="hover btn-styles px-2 text-uppercase">Поделиться</span> </div>
+                       <div class="my-2" data-toggle="modal" data-target="#comments"><span class="hover btn-styles px-2 text-uppercase">Коментарии</span> </div>
                    </div>
 
                    <div>

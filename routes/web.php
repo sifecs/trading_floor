@@ -21,6 +21,8 @@ Route::get('/createCategory', 'HomeController@createCategory');
 Route::get('/product/{id}', 'ProductsControler@show')->name('product.show');
 Route::get('/products', 'ProductsControler@list')->name('products.list');
 Route::get('/products/category/{id}', 'ProductsControler@listCategory')->name('category.list');
+Route::get('/shops', 'shopsControler@list')->name('shops.list');
+Route::get('/shop/{id}', 'shopsControler@shop')->name('shop');
 Route::post('/coment', 'ComentsControler@store');
 
 

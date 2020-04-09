@@ -34,7 +34,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link @if(Route::current()->named(['shops.list'])) active @endif" href="{{route('shops.list')}}">
                 <i class="fa fa-cart-arrow-down fa-3x" aria-hidden="true"></i>
                 <div>Магазины </div>
             </a>

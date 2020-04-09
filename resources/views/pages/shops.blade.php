@@ -4,9 +4,26 @@
 
     <div class="wrapper my-4">
         <div class="container">
-            <div class="row">
-                <h1>sds</h1>
-            </div>
+            <div class="text-center text-uppercase" style="font-size: 20px;">Магизины</div>
+            <ul class="mp-0">
+                @foreach($shops as $shop)
+
+                    <li class="my-3">
+                        <a href="{{route('shop', $shop->id)}}" class="row highlight vip" style="text-decoration: none; color: black;">
+                            <div class="col-sm-3 col-md-2 p-1">
+                                <img class="mine-img" src="{{$shop->img}}">
+                            </div>
+                            <div class="col-sm-9 col-md-10 my-md-0" >
+                                <div class="text-uppercase " style="font-size: 16px; font-weight: 600;">{{$shop->name}} </div>
+                                <div class="text-muted"> {{$shop->description}}</div>
+                            </div>
+                        </a>
+                    </li>
+
+                @endforeach
+                {{$shops->links()}}
+            </ul>
+
         </div>
     </div>
 

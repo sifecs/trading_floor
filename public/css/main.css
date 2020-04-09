@@ -31,6 +31,32 @@
     width: 350px;
 }
 
+.mine-img {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+}
+
+.mine-price{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.highlight{
+    border: solid #eaa83e 5px;
+}
+
+.vip {
+    background-color: #eaa83e;
+}
+
+.hover:hover {
+    background-color: #eaa83e;
+    text-decoration: none;
+    transition:all 0.5s;
+}
+
 @media (max-width: 992px) {
     .mine-star{
         right: -190px;
@@ -49,6 +75,9 @@
     .mine-title{
         width: 300px;
     }
+    .cusctom-text-center{
+        text-align:center;
+    }
 }
 
 
@@ -61,4 +90,16 @@
     .mine-title{
         width: auto;
     }
+
+    .mine-img{
+        height: auto;
+        width: 100%;
+    }
+
+    .mine-price{
+        position: relative;
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+
 }

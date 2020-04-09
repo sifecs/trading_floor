@@ -18,7 +18,6 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('patronymic')->nullable();
             $table->string('surname')->nullable();
-            $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('favorites_id')->nullable();

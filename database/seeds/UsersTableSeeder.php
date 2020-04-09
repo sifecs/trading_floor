@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
             'name' => 'Сергей',
             'patronymic' => 'Александровичь',
             'surname' => 'Ерохов',
-            'address' => 'Новопавловка бла бла бла',
             'phone' => '+996556103039',
             'email' => 'sifecs15@mail.ru',
             'shop_id' => '1',

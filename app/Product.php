@@ -13,6 +13,10 @@ class Product extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function shop () {
+        return $this->belongsTo(Shops::class,'shop_id');
+    }
+
     public function getImages() {
         if ($this->img == null) {
             return '/img/no-image.png';

@@ -21,6 +21,7 @@ class ProductsTableSeeder extends Seeder
             'comments' => '',
             'user_id' => '1',
             'category_id' => '2',
+            'shop_id' => '1',
         ]);
         DB::table('products')->insert([
             'title' => 'Мишка игровая',
@@ -31,6 +32,7 @@ class ProductsTableSeeder extends Seeder
             'comments' => '',
             'user_id' => '1',
             'category_id' => '2',
+            'shop_id' => '1',
         ]);
 
     }
