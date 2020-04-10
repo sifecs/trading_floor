@@ -10,7 +10,7 @@ class profileController extends Controller
 {
     public function index () {
         $user = Auth::user();
-//        dd($user->shop->name);
+//        dd($user->shop);
         return view('pages.profile',['user'=>$user]);
     }
 
@@ -18,13 +18,10 @@ class profileController extends Controller
         $this->validate($request, [
             'name' =>'required',
             'email' => ['required','email',Rule::unique('users')->ignore(Auth::user()->id),],
-            'avatar' =>'nullable|image'
         ]);
         $user = Auth::user();
         $user->edit($request->all());
         $user->generatePassword($request->get('password'));
-        $user->uploadAvatar($request->file('avatar'));
-
-        return redirect()->back()->with('status','Профиль успешно изменён');
+        return response($user);
     }
 }

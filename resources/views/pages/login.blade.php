@@ -12,6 +12,9 @@
 
                     <form class="my-3" role="form" method="post" action="/login">
                         @include('admin.errors')
+                        @if(session('status'))
+                            <div class="alert alert-danger">{{session('status')}}</div>
+                        @endif
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="email">Ваш email аддресс </label>

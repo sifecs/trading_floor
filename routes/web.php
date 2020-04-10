@@ -25,11 +25,16 @@ Route::get('/shops', 'shopsControler@list')->name('shops.list');
 Route::get('/shop/{id}', 'shopsControler@shop')->name('shop');
 Route::post('/coment', 'ComentsControler@store');
 
+Route::post('/addShop', 'shopsControler@addShop');
+
+
 
 Route::group(['prefix'=>'ajax'], function (){
     Route::get('Coments/{id}', 'ProductsControler@ajaxComents');
     Route::get('Products', 'ProductsControler@ajaxProducts');
     Route::post('redactShopDescription', 'shopsControler@ajaxRedactShopDescription');
+    Route::post('removeImg', 'shopsControler@removeImg');
+    Route::post('UpdateImg', 'shopsControler@ajaxUpdateImg');
 });
 
 

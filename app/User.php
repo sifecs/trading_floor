@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'patronymic', 'surname', 'phone'
     ];
 
     /**
@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     public function shop()
     {
-        return $this->belongsTo(Shops::class);
+        return $this->hasOne(Shops::class);
     }
 
     public static function add ($fields) {
