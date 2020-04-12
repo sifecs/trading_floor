@@ -11,7 +11,7 @@
                 <li class="my-3">
                     <a href="{{route('product.show',  $product->id )}}" class="row highlight"  style="position: relative; color: black ">
                         <div class="col-sm-3 col-md-2 p-1">
-                            <img class="mine-img" src="{{$product->img}}">
+                            <img class="mine-img" src="{{$product->getImages()[0]}}">
                         </div>
                         <div class="col-sm-9 my-md-0" style="max-width: 600px;">
                             <div class="text-uppercase " style="font-size: 16px; font-weight: 600;">{{$product->title}} </div>

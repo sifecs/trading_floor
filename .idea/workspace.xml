@@ -2,20 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="192703bf-59cb-4bba-87a4-887357b2df5f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/ajax/AjaxUserShopProducts.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/ajax/ajaxPaginate.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ComentsControler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ComentsControler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductsControler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductsControler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/profileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/profileController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/shopsControler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/shopsControler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Shops.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Shops.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/coments.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/coments.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_07_125638_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_07_125638_create_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_07_211457_create_coments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_07_211457_create_coments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_08_153722_create_shops_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_08_153722_create_shops_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/ProductsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ProductsTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/CAjCoi3pgG.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/D0PVJrkFwU.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/h5wJ4YJb6U.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/i8BhG1tug1.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/и.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/X1xHpEqeYNbBlHfqYkJUUqX85zJdFc.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/productCart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/productCart.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/shop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/shop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/shops.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/shops.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,6 +161,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -178,7 +189,9 @@
       <workItem from="1586368100389" duration="11466000" />
       <workItem from="1586433424185" duration="24047000" />
       <workItem from="1586500728033" duration="32509000" />
-      <workItem from="1586543591374" duration="8108000" />
+      <workItem from="1586543591374" duration="9208000" />
+      <workItem from="1586586220002" duration="43147000" />
+      <workItem from="1586674848698" duration="2390000" />
     </task>
     <servers />
   </component>
@@ -190,17 +203,25 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1600.860@0.0.1600.860" timestamp="1586285946994" />
-    <state x="635" y="348" key="NewPhpFileDialog" timestamp="1586369584401">
+    <state x="530" y="183" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1586612407179">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="635" y="348" key="NewPhpFileDialog/0.0.1600.860@0.0.1600.860" timestamp="1586369584401" />
-    <state x="456" y="190" key="run.anything.popup" timestamp="1586528326719">
+    <state x="530" y="183" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1586612407179" />
+    <state x="635" y="348" key="NewPhpFileDialog" timestamp="1586599452378">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="456" y="190" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1586528326719" />
-    <state x="456" y="71" width="672" height="676" key="search.everywhere.popup" timestamp="1586362353062">
+    <state x="635" y="348" key="NewPhpFileDialog/0.0.1600.860@0.0.1600.860" timestamp="1586599452378" />
+    <state x="301" y="60" key="SettingsEditor" timestamp="1586598646865">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="456" y="71" width="672" height="676" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1586362353062" />
+    <state x="301" y="60" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1586598646865" />
+    <state x="456" y="190" key="run.anything.popup" timestamp="1586635376163">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="456" y="190" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1586635376163" />
+    <state x="456" y="71" width="672" height="676" key="search.everywhere.popup" timestamp="1586603349223">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="456" y="71" width="672" height="676" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1586603349223" />
   </component>
 </project>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\coments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ComentsControler extends Controller
 {
@@ -13,8 +14,9 @@ class ComentsControler extends Controller
             'product_id'=> 'required|numeric',
         ]);
 
-        $all = $request->all();
-        $all['user_id'] = '1';
-        coments::create($all);
+       $coments = coments::create($request->all());
+       $coments->user_id = Auth::user()->id;
+       $coments->date = date('d-m-Y');
+       $coments->save();
     }
 }

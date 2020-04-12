@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'password' => '123',
             'phone' => '+996556103039',
             'email' => 'sifecs15@mail.ru',
-            'shop_id' => '1',
+            'is_admin' => '0',
         ]);
     }
 }

@@ -12,7 +12,7 @@ class Shops extends Model
         'name', 'description', 'address'
     ];
     public function user() {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function products() {
@@ -24,7 +24,7 @@ class Shops extends Model
         $this->save();
     }
 
-    public  function uploadAvatar ($image) {
+    public  function uploadImg ($image) {
         if ($image == null){ return; }
 
         $this->removeImages();
@@ -44,8 +44,8 @@ class Shops extends Model
 
     public function getImage() {
         if ($this->img == null) {
-            return '/no-shop-image.png';
+            return 'uploads/no-shop-image.png';
         }
-        return '/'. $this->img;
+        return 'uploads/'. $this->img;
     }
 }

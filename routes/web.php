@@ -15,28 +15,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index');
-
-Route::get('/createCategory', 'HomeController@createCategory');
-
 Route::get('/product/{id}', 'ProductsControler@show')->name('product.show');
 Route::get('/products', 'ProductsControler@list')->name('products.list');
-Route::get('/products/category/{id}', 'ProductsControler@listCategory')->name('category.list');
 Route::get('/shops', 'shopsControler@list')->name('shops.list');
 Route::get('/shop/{id}', 'shopsControler@shop')->name('shop');
-Route::post('/coment', 'ComentsControler@store');
-
-Route::post('/addShop', 'shopsControler@addShop');
-
-
+Route::get('/products/category/{id}', 'ProductsControler@productsCategory')->name('category.list');
 
 Route::group(['prefix'=>'ajax'], function (){
-    Route::get('Coments/{id}', 'ProductsControler@ajaxComents');
     Route::get('Products', 'ProductsControler@ajaxProducts');
-    Route::post('redactShopDescription', 'shopsControler@ajaxRedactShopDescription');
-    Route::post('removeImg', 'shopsControler@removeImg');
-    Route::post('UpdateImg', 'shopsControler@ajaxUpdateImg');
-});
+    Route::get('paginate', 'ProductsControler@getAjaxPaginate');
+    Route::get('Coments/{id}', 'ProductsControler@ajaxComents');
+    Route::group(['middleware' =>'auth'], function (){
+        Route::get('userShopProducts', 'ProductsControler@AjaxUserShopProducts');
+        Route::post('removeProduct', 'ProductsControler@ajaxRemoveProduct');
+        Route::post('redactShopDescription', 'shopsControler@ajaxRedactShopDescription');
+        Route::post('removeImg', 'shopsControler@removeImg');
+        Route::post('UpdateImg', 'shopsControler@ajaxUpdateImg');
+    });
 
+});
 
 Route::group(['middleware' =>'guest'], function (){
     Route::get('/register', 'AuthControler@registrForm')->name('register');
@@ -49,13 +46,13 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('/loguot', 'AuthControler@loguot')->name('loguot');
     Route::get('/profile', 'profileController@index')->name('profile');
     Route::post('/profile', 'profileController@store');
-});
+    Route::post('/addShop', 'shopsControler@addShop');
+    Route::delete('/removeShop', 'shopsControler@removeShop');
+    Route::post('/coment', 'ComentsControler@store');
 
-//Route::group(['middleware' =>'auth'], function (){
-//    Route::get('/loguot', 'AuthControler@loguot');
-//    Route::get('/profile', 'profileController@index');
-//    Route::post('/profile', 'profileController@store');
-//});
+    Route::post('/addProduct', 'ProductsControler@AddProduct');
+
+});
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
     Route::get('/', 'DashboardController@index');

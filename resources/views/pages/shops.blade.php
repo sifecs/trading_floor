@@ -11,7 +11,7 @@
                     <li class="my-3">
                         <a href="{{route('shop', $shop->id)}}" class="row highlight vip" style="text-decoration: none; color: black;">
                             <div class="col-sm-3 col-md-2 p-1">
-                                <img class="mine-img" src="{{$shop->img}}">
+                                <img class="mine-img" src="{{$shop->getImage()}}">
                             </div>
                             <div class="col-sm-9 col-md-10 my-md-0" >
                                 <div class="text-uppercase " style="font-size: 16px; font-weight: 600;">{{$shop->name}} </div>

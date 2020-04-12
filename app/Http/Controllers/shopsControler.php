@@ -28,7 +28,7 @@ class shopsControler extends Controller
         ]);
         $shop = Shops::create($request->all());
         $shop->user_id = Auth::user()->id;
-        $shop->uploadAvatar($request->file('img'));
+        $shop->uploadImg($request->file('img'));
         $shop->save();
         return redirect()->back()->with('status', 'Ваш магазин успешно создан');
     }
@@ -43,7 +43,7 @@ class shopsControler extends Controller
 
     public function ajaxUpdateImg(Request $request) {
         $shop = Auth::user()->shop;
-        $shop->uploadAvatar($request->file('img'));
+        $shop->uploadImg($request->file('img'));
         return $shop->getImage();
     }
 
@@ -55,5 +55,11 @@ class shopsControler extends Controller
         return $shop->getImage();
     }
 
+    public function removeShop(Request $request) {
+        $shop = Auth::user()->shop;
+        $shop->removeImages();
+        $shop->delete();
+        return redirect()->back()->with('status', 'Ваш магазин успешно удалён');
+    }
 
 }

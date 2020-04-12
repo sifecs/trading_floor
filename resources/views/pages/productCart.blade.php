@@ -55,8 +55,8 @@
                        <div class="text-uppercase text-center mb-4" style="font-size: 20px;"> Информация о продавце </div>
                        <ul class="text-muted mp-0">
                            <li> {{$product->shop->address}} </li>
-                           <li> {{$product->author->getfullname()}} </li>
-                           <li> {{$product->author->phone}} </li>
+                           <li> {{$product->shop->user->getfullname()}} </li>
+                           <li> {{$product->shop->user->phone}} </li>
                        </ul>
                        <div class="my-2"><span class="hover btn-styles px-2 text-uppercase">Написать сообщение продавцу</span> </div>
                        <a href="{{route('shop', $product->shop_id)}}" class="my-2 hover"><span class="hover btn-styles px-2 text-uppercase">К магазину продавцу</span> </a>
@@ -68,11 +68,10 @@
                    <div>
                        <ul class="mp-0 product-mine">
                            @foreach($products as $product_mine)
-
                                <li class=" mb-3" style="position: relative">
                                    <a class="row" href="{{route('product.show',  $product_mine->id )}}">
                                        <div class="col-sm-4">
-                                           <img class="img-fluid" src="  {{$product_mine->getImages()[1]}}" >
+                                           <img class="img-fluid" src="  {{$product_mine->getImages()[0]}}" >
                                        </div>
                                        <div class="col-sm-8">
                                            <div class="mine-title text-uppercase"  style="color: black">{{$product_mine->title}}</div>

@@ -11,58 +11,113 @@
             @if(session('status'))
                 <div class="alert alert-success">{{session('status')}}</div>
             @endif
+
             @if($user->shop)
-                <div class="">
+                <div class="user-shop">
                     <div class="text-uppercase text-center my-4" style="font-size: 20px;">Ваш магазин {{$user->shop->name}}</div>
 
-                    <img class="img-fluid" name="" id="shop-img" src="uploads/{{$user->shop->getImage()}}">
+                    <img class="img-fluid" name="" id="shop-img" src="{{$user->shop->getImage()}}">
 
                     <div class="upload_form row justify-content-between mp-0">
-                        <form action="/updataImg" id="update-img" method="post" enctype="multipart/form-data">
-                            {{csrf_field()}}
-                            <label class="">
-                                <input name="img" id="updata-img" type="file" class="main_input_file" />
-                                <div class="btn uplode-file" id="">Загрузить фото</div>
-                                <input class="f_name" type="text" id="f_name" value="Файл не выбран." disabled />
-                            </label>
-                        </form>
-                            <div class="btn delete-file" id="delete-img-file" style="">Удалить фото</div>
-                        </div>
+                        <label class="">
+                            <input name="img" id="updata-img" type="file" class="main_input_file" />
+                            <div class="btn uplode-file" id="">Загрузить фото</div>
+                            <input class="f_name" type="text" id="f_name" value="Файл не выбран." disabled />
+                        </label>
+                        <div class="btn delete-file" id="delete-img-file" style="">Удалить фото</div>
+                    </div>
 
                     <div>{{$user->shop->address}} </div>
                     <div> Описание  <span class="" id="description">{{$user->shop->description}}</span> </div>
-                    <div class="my-3"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#redact-description">Редактировать Описание</span></div>
 
+                    <div class="my-3"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#redact-description">Редактировать Описание</span></div>
                     <div class="my-2"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#redact-user-data">Выделить магазин</span></div>
                     <div class="my-2"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#redact-user-data">Сделать vip</span></div>
-                    <div class="my-2"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#redact-user-data">Удалить магазин</span></div>
-
+                    <div class="my-2">
+                        <form action="/removeShop" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            {{csrf_field()}}
+                            <button type="submit" onclick="return confirm('Вы уверены, что хотите Удалить магазин ?')" class="reset-btn text-uppercase"> <span class="btn-styles px-2"> Удалить магазин </span> </button>
+                        </form>
+                    </div>
                 </div>
-
             @endif
-
-            <div>
+            <div class="user">
                 <div class="text-uppercase text-center my-4" style="font-size: 20px;">Личные данные</div>
                 <div id="user-full-name"> {{$user->getfullname()}} </div>
                 <div id="user-email"> {{$user->email}} </div>
                 <div id="user-phone"> {{$user->phone}} </div>
+
                 <div class="my-2"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#redact-user-data">Редактировать личные данные</span></div>
-
-
                 @if(!$user->shop)
                 <div class="my-2"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#add-shop">Создать магазин?</span></div>
                 @endif
-
             </div>
 
+            <div class="my-3"><a href="{{route('loguot')}}" class="text-danger">Выйти</a></div>
 
-            <div class=""><a href="{{route('loguot')}}" class="text-danger">Выйти</a></div>
+            @if($user->shop)
+
+                <div class="products">
+                    <div class="text-uppercase text-center my-4" style="font-size: 20px;">Товары</div>
+
+                    <div class="my-2  row justify-content-between mp-0" style="max-width: 400px;">
+                        <span class="btn-styles px-2 text-uppercase my-2" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                              aria-controls="collapseTwo">Забронированные товары</span>
+                        <span class="btn-styles px-2 text-uppercase my-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                              aria-controls="collapseOne">Все</span>
+                    </div>
+
+                    <div id="accordion">
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <ul class="mp-0" id="shop-user-products">
+                                @include('ajax.AjaxUserShopProducts')
+                            </ul>
+                            <div class="upload_form row justify-content-between mp-0">
+                                <div id="profile-products-paginate"> {{$products->links()}} </div>
+                                <div class="" ><span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#add-product">Добавить товар</span></div>
+                            </div>
+                        </div>
+
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <ul class="mp-0">
+                                <li class="">
+                                    <a class="row mp-0">
+                                        <div class="col-sm-3 col-md-2 mp-0">
+                                            <img class="mine-img" src="https://avatars.mds.yandex.net/get-pdb/2412470/2394617b-e894-4725-8c10-f6aba217e3e9/s1200">
+                                        </div>
+
+                                        <div class="col-sm-8 mx-2" style="max-width: 600px;">
+                                            <div class="row h-100 pl-md-4 pl-sm-0 px-2">
+                                                <div class="text-uppercasecol-12" style="font-size: 16px; font-weight: 600;">Название бронированного продукта </div>
+                                                <div class="col-12 mp-0 mb-2 text-muted align-self-end">27000.руб</div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <div class="my-2 row justify-content-between mp-0">
+                                        <span class="btn-styles px-2 text-uppercase my-2">Подтвердить бронь</span>
+                                        <span class="btn-styles px-2 text-uppercase my-2" >Отменить бронь</span>
+                                    </div>
+
+                                    <div>
+                                        <div class="text-uppercase text-center my-4" style="font-size: 20px;">Информация о покупателе</div>
+
+                                        <div class="text-muted "> {{$user->getfullname()}} </div>
+                                        <div class="text-muted mb-2"> {{$user->phone}} </div>
+                                        <span class="btn-styles px-2 text-uppercase" >Написать сообщение покупателю</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            @endif
 
          </div>
-
     </div>
 </div>
-
 
 <div class="modal fade" id="redact-user-data" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -110,7 +165,71 @@
     </div>
 </div>
 
-@if($user->shop->id)
+@if($user->shop)
+
+    <div class="modal fade" id="add-product" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавления Товара</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form class="" id="" method="post" action="/addProduct" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <label class="">
+                                <input name="img[]" type="file" multiple class="main_input_file" />
+                                <div class="btn uplode-file">Загрузить фото</div>
+                                <input class="f_name" type="text" id="f_name" value="Файл не выбран." disabled />
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" name="category_id">
+                                @foreach($categories as $category)
+                                    @if ($category-> isRoot())
+                                        <optgroup label="{{$category->title}}">
+                                            @foreach($category->getSubcategory($category->id) as $subcategory)
+                                                <option value="{{ $subcategory->id}}"> {{ $subcategory-> title}} </option>
+                                            @endforeach
+
+                                            @endif
+                                        </optgroup>
+                                        @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" placeholder="Название" class="form-control" name="title" value="">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Цена" name="price" value="" >
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Cкидка" name="discounts" value="" >
+                        </div>
+
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Описание" name="description" > </textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit"  class="btn btn-primary" id="add-product">Сохранить</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="redact-description" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
