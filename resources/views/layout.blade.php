@@ -42,12 +42,15 @@
                 <div>Магазины </div>
             </a>
         </li>
+
+        @if(Auth::check())
         <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link @if(Route::current()->named(['favorite.list'])) active @endif" href="{{route('favorite.list')}}">
                 <i class="fa fa-star-o fa-3x" aria-hidden="true"></i>
                 <div>Избранное </div>
             </a>
         </li>
+        @endif
 
         <li class="nav-item">
         @if(Auth::check())

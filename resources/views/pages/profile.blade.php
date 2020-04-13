@@ -31,8 +31,9 @@
                     <div> Описание  <span class="" id="description">{{$user->shop->description}}</span> </div>
 
                     <div class="my-3"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#redact-description">Редактировать Описание</span></div>
-                    <div class="my-2"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#redact-user-data">Выделить магазин</span></div>
-                    <div class="my-2"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#redact-user-data">Сделать vip</span></div>
+                    <div class="my-2"> <span class="btn-styles px-2 text-uppercase shop-set-privileges" data="2" >Выделить магазин</span></div>
+
+                    <div class="my-2"> <span class="btn-styles px-2 text-uppercase shop-set-privileges" data="3">Сделать vip</span></div>
                     <div class="my-2">
                         <form action="/removeShop" method="post">
                             <input type="hidden" name="_method" value="DELETE">
@@ -74,40 +75,14 @@
                                 @include('ajax.AjaxUserShopProducts')
                             </ul>
                             <div class="upload_form row justify-content-between mp-0">
-                                <div id="profile-products-paginate"> {{$products->links()}} </div>
+                                <div id="profile-products-paginate"> @include('ajax.ajaxPaginate') </div>
                                 <div class="" ><span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#add-product">Добавить товар</span></div>
                             </div>
                         </div>
 
                         <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-                            <ul class="mp-0">
-                                <li class="">
-                                    <a class="row mp-0">
-                                        <div class="col-sm-3 col-md-2 mp-0">
-                                            <img class="mine-img" src="https://avatars.mds.yandex.net/get-pdb/2412470/2394617b-e894-4725-8c10-f6aba217e3e9/s1200">
-                                        </div>
-
-                                        <div class="col-sm-8 mx-2" style="max-width: 600px;">
-                                            <div class="row h-100 pl-md-4 pl-sm-0 px-2">
-                                                <div class="text-uppercasecol-12" style="font-size: 16px; font-weight: 600;">Название бронированного продукта </div>
-                                                <div class="col-12 mp-0 mb-2 text-muted align-self-end">27000.руб</div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <div class="my-2 row justify-content-between mp-0">
-                                        <span class="btn-styles px-2 text-uppercase my-2">Подтвердить бронь</span>
-                                        <span class="btn-styles px-2 text-uppercase my-2" >Отменить бронь</span>
-                                    </div>
-
-                                    <div>
-                                        <div class="text-uppercase text-center my-4" style="font-size: 20px;">Информация о покупателе</div>
-
-                                        <div class="text-muted "> {{$user->getfullname()}} </div>
-                                        <div class="text-muted mb-2"> {{$user->phone}} </div>
-                                        <span class="btn-styles px-2 text-uppercase" >Написать сообщение покупателю</span>
-                                    </div>
-                                </li>
+                            <ul class="mp-0" id="products-reservation">
+                                @include('ajax.ajaxProductReservation')
                             </ul>
                         </div>
 

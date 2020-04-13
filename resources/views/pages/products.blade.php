@@ -17,7 +17,10 @@
                         </a>
                         <div class="card-body">
                             <a href="#" class="card-link">Купить</a>
-                            <a href="#" class="card-link">В избранное</a>
+                            @if( Auth::check() && !Auth::user()->checkDuplFavorites($product->id) )
+                                <a href="#" class="card-link add-favorites {{$product->id}}" data="{{$product->id}}"> В избранное </a>
+                            @endif
+
                         </div>
                     </div>
                 </div>

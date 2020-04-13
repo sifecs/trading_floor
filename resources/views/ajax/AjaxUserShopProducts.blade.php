@@ -1,5 +1,5 @@
 @foreach($products as $product)
-    <li class="my-3 highlight p-1" id="{{$product->id}}">
+    <li class="my-3 {{$product->privilege->class}} p-1" id="{{$product->id}}">
         <a class="row "  href="{{route('product.show',  $product->id )}}" style="position: relative; color: black ">
             <div class="col-sm-3 col-md-2">
                 <img class="mine-img" src="{{$product->getImages()[0]}}">
@@ -12,8 +12,8 @@
             </div>
         </a>
         <div class="my-2">
-            <span class="btn-styles px-2 text-uppercase my-2">Сделать VIP</span>
-            <span class="btn-styles px-2 text-uppercase my-2" >Выделить</span>
+            <span class="btn-styles px-2 text-uppercase my-2 set-privileges" data="3">Сделать VIP</span>
+            <span class="btn-styles px-2 text-uppercase my-2 set-privileges" data="2">Выделить</span>
 {{--            <span class="btn-styles px-2 text-uppercase my-2" data="{{$product->id}}" id="redact-product-btn">Редактировать</span>--}}
             <span class="btn-styles px-2 text-uppercase my-2 delete-product" >Удалить товар</span>
         </div>

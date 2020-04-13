@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Mail\shareEmail;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 
 class ProductsControler extends Controller
 {
@@ -48,6 +51,9 @@ class ProductsControler extends Controller
         if ($shop != null ){
             $product = $shop->products->find($request->get('idProduct'));
             $productId = $product->id;
+            foreach ($product->reservation as $reservation) {
+                $reservation->pivot->delete();
+            }
             $product->removeProductAndcoments();
             return $productId;
         }
@@ -73,7 +79,12 @@ class ProductsControler extends Controller
         $user = Auth::user();
         $products = $user->shop->products()->paginate(1);
         return view('ajax.AjaxUserShopProducts',['products' => $products]);
-//        return $request->all();
+    }
+
+    public function ajaxProductReservation(Request $request){
+        $user = Auth::user();
+        $shopReservation = $user->shop->shopReservation()->paginate(1);
+        return view('ajax.ajaxProductReservation',['shopReservation' => $shopReservation]);
     }
 
     public function getAjaxPaginate(Request $request) {
@@ -81,4 +92,30 @@ class ProductsControler extends Controller
         $products = $user->shop->products()->paginate(1);
         return view('ajax.ajaxPaginate',['products' => $products]);
     }
+
+    public function ajaxSetPrivileges(Request $request){
+        $product = Auth::user()->shop->products->find($request->get('idProduct'));
+        if ($product) {
+            $product->privilege_id = $request->get('idPrivileges');
+            $product->save();
+            $privilegeClass = $product->privilege->class;
+            return $privilegeClass;
+        }
+    }
+
+
+    public function share(Request $request){
+        $this->validate($request, [
+            'email' => ['required','email'],
+            'name_friend' =>'required',
+            'email_friend' => ['required','email'],
+        ]);
+
+        $emailFriend = $request->get('email_friend');
+        $product = Product::find($request->get('product_id'))->firstOrFail();
+
+        Mail::to($emailFriend)->send(new shareEmail(['request' => $request->all(), 'product' => $product ]));
+        return redirect()->back()->with('status', 'Вы успешно поделились продуктом');
+    }
+
 }

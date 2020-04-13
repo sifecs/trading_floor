@@ -18,23 +18,106 @@ $(document).on('click', '#add-coment', function (e) {
         });
 });
 
+$(document).on('click', '.add-reservation', function (e) {
+    e.preventDefault();
+    let id_product = $(this).attr('data');
+    postAjaxData ({'id_product': id_product } , '/ajax/addReservation')
+        .done(function( data ) {
+            console.log('успех');
+            console.log(data);
+            $('#add-reservation-wrap').remove();
+        })
+        .fail(function( jqXHR ) {
+            console.log('ошика');
+            console.log(jqXHR);
+        });
+});
+
+$(document).on('click', '.add-favorites', function (e) {
+    e.preventDefault();
+    let id_product = $(this).attr('data');
+    postAjaxData ({'id_product': id_product } , '/ajax/favoriteAdd')
+        .done(function( data ) {
+            console.log('успех');
+            console.log(data);
+            $(`.${id_product}`).remove();
+        })
+        .fail(function( jqXHR ) {
+            console.log('ошика');
+            console.log(jqXHR);
+        });
+});
+
+$(document).on('click', '.cancellation-reservation', function (e) {
+    e.preventDefault();
+    let idReservation = $(this).attr('data').split('-');
+    if (confirm('Вы диствительно хотите отменить бронь?')) {
+        postAjaxData({'idProduct': idReservation[0], 'idUser': idReservation[1]}, '/ajax/cancellationReservation')
+            .done(function (data) {
+                $(`#cancellation-reservation_${data}`).remove();
+            })
+            .fail(function (jqXHR) {
+                console.log('ошибка');
+                console.log(jqXHR);
+            });
+    }
+});
+
 $(document).on('click','.product-mine .pagination a', function (e) {
     e.preventDefault();
     let page = $(this).attr('href').split('page=')[1];
     getAjaxData(page,'/ajax/Products','.product-mine')
 });
 
-$(document).on('click','#profile-products-paginate .pagination a', function (e) {
+$(document).on('click','.product_favorite .pagination a', function (e) {
     e.preventDefault();
     let page = $(this).attr('href').split('page=')[1];
-    // console.log(page)
-    getAjaxData(page,'/ajax/userShopProducts','#shop-user-products')
+    getAjaxData(page,'/ajax/ProductsFavorite','.product_favorite')
+});
+
+$(document).on('click','#products-reservation .pagination a', function (e) {
+    e.preventDefault();
+    let page = $(this).attr('href').split('page=')[1];
+    getAjaxData(page,'/ajax/productReservation','#products-reservation')
 });
 
 $(document).on('click','#profile-products-paginate .pagination a', function (e) {
     e.preventDefault();
     let page = $(this).attr('href').split('page=')[1];
+    getAjaxData(page,'/ajax/userShopProducts','#shop-user-products')
     getAjaxData(page,'/ajax/paginate','#profile-products-paginate')
+});
+
+$(document).on('click', '.set-privileges', function (e) {
+    e.preventDefault();
+    let idPrivileges = $(this).attr('data');
+    let idProduct = $(this).parent().parent().attr('id');
+    postAjaxData ({'idPrivileges': idPrivileges,'idProduct':idProduct } , '/ajax/setPrivileges')
+        .done(function( data ) {
+            console.log('успех');
+            console.log(data);
+            $(`#${idProduct}`).removeClass('vip');
+            $(`#${idProduct}`).removeClass('highlight');
+            $(`#${idProduct}`).addClass(data);
+        })
+        .fail(function( jqXHR ) {
+            console.log('ошика');
+            console.log(jqXHR);
+        });
+});
+
+$(document).on('click', '.shop-set-privileges ', function (e) {
+    e.preventDefault();
+    let idPrivileges = $(this).attr('data');
+    postAjaxData ({'idPrivileges': idPrivileges} , '/ajax/shopSetPrivileges')
+        .done(function( data ) {
+            console.log('успех');
+            console.log(data);
+        })
+        .fail(function( jqXHR ) {
+            console.log('ошика');
+            console.log(jqXHR);
+        });
 });
 
 $(document).on('click', '#save-redact-description', function (e) {
@@ -86,15 +169,33 @@ $(document).on('click', '.delete-product', function (e) {
     e.preventDefault();
     let idProduct = $(this).parent().parent().attr('id');
 
-    postAjaxData ({'idProduct':idProduct}, '/ajax/removeProduct')
-        .done(function( data ) {
-            $(`#${data}`).remove();
-            console.log(data);
-        })
-        .fail(function( jqXHR ) {
-            console.log('ошибка');
-            console.log(jqXHR);
-        });
+    if (confirm('Вы диствительно хотите удалить товар?')) {
+        postAjaxData({'idProduct': idProduct}, '/ajax/removeProduct')
+            .done(function (data) {
+                $(`#${data}`).remove();
+                console.log(data);
+            })
+            .fail(function (jqXHR) {
+                console.log('ошибка');
+                console.log(jqXHR);
+            });
+    }
+});
+
+$(document).on('click', '.remove-favorite', function (e) {
+    e.preventDefault();
+    let idProduct = $(this).attr('data');
+    if (confirm('Вы диствительно хотите удалить избранный товар?')) {
+        postAjaxData({'idProduct': idProduct}, '/ajax/favoriteRemove')
+            .done(function (data) {
+                $(`#favorite_id_${data}`).remove();
+                console.log(data);
+            })
+            .fail(function (jqXHR) {
+                console.log('ошибка');
+                console.log(jqXHR);
+            });
+    }
 });
 
 function getAjaxData (page, url, element) {

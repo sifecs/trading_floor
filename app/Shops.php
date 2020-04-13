@@ -11,6 +11,20 @@ class Shops extends Model
     protected $fillable = [
         'name', 'description', 'address'
     ];
+
+    public function privilege(){
+        return $this->belongsTo(privilege::class);
+    }
+
+    public function shopReservation() {
+        return $this->belongsToMany(
+            Product::class,
+            'reservation',
+            'shop_id',
+            'product_id'
+        )->withPivot('user_id');
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
     }

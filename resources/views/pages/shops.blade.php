@@ -9,7 +9,7 @@
                 @foreach($shops as $shop)
 
                     <li class="my-3">
-                        <a href="{{route('shop', $shop->id)}}" class="row highlight vip" style="text-decoration: none; color: black;">
+                        <a href="{{route('shop', $shop->id)}}" class="row {{$shop->privilege->class}}" style="text-decoration: none; color: black;">
                             <div class="col-sm-3 col-md-2 p-1">
                                 <img class="mine-img" src="{{$shop->getImage()}}">
                             </div>

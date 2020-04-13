@@ -19,7 +19,8 @@ class CreateShopsTable extends Migration
             $table->string('img')->nullable();
             $table->text('description');
             $table->string('address')->nullable();
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable();
+            $table->integer('privilege_id')->default(1);
             $table->timestamps();
         });
     }

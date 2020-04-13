@@ -4,6 +4,10 @@
 
     <div class="wrapper my-4" style="overflow: hidden">
        <div class="container">
+           @if(session('status'))
+               <div class="alert alert-success">{{session('status')}}</div>
+           @endif
+           @include('admin.errors')
            <div class="row">
                <div class="col-md-8" style="position: static">
                     <div class="text-uppercase my-2" style="width: 300px; margin: 0 auto; font-size: 20px;">
@@ -26,14 +30,11 @@
 
                    <div class="mt-3" >
                        <div class="text-uppercase text-center" style="font-size: 20px;"> Описание </div>
-                       <ul class="text-muted mp-0">
-                           <li>-Станционарная игровая приставка</li>
-                           <li>-Беспроводной контроллер в комплекте</li>
-                           <li>-Станционарная игровая приставка</li>
-                           <li>-Беспроводной контроллер в комплекте</li>
-                           <li>-Станционарная игровая приставка</li>
-                           <li>-Беспроводной контроллер в комплекте</li>
-                       </ul>
+                       <div class="text-muted mp-0">
+                           <p>
+                               {!! nl2br(e($product->description))  !!}
+                           </p>
+                       </div>
                    </div>
 
                    <div class="row my-4">
@@ -49,7 +50,9 @@
                        </div>
                    </div>
 
-                   <div><span class="btn-styles px-2 text-uppercase hover">Забронировать товар</span> </div>
+                    @if( Auth::check() && !Auth::user()->checkDuplReservation($product->id) )
+                   <div id="add-reservation-wrap" ><span data="{{$product->id}}" class="btn-styles px-2 text-uppercase hover add-reservation">Забронировать товар</span> </div>
+                    @endif
 
                    <div class="my-4">
                        <div class="text-uppercase text-center mb-4" style="font-size: 20px;"> Информация о продавце </div>
@@ -60,30 +63,16 @@
                        </ul>
                        <div class="my-2"><span class="hover btn-styles px-2 text-uppercase">Написать сообщение продавцу</span> </div>
                        <a href="{{route('shop', $product->shop_id)}}" class="my-2 hover"><span class="hover btn-styles px-2 text-uppercase">К магазину продавцу</span> </a>
-                       <div class="my-2"><span class="hover btn-styles px-2 text-uppercase">Добавить в избранное</span> </div>
+                        @if( Auth::check() && !Auth::user()->checkDuplFavorites($product->id) )
+                        <div class="my-2"><span class="hover btn-styles px-2 text-uppercase add-favorites {{$product->id}}" data="{{$product->id}}">Добавить в избранное</span> </div>
+                        @endif
                        <div class="my-2" data-toggle="modal" data-target="#share"><span class="hover btn-styles px-2 text-uppercase">Поделиться</span> </div>
                        <div class="my-2" data-toggle="modal" data-target="#comments"><span class="hover btn-styles px-2 text-uppercase">Коментарии</span> </div>
                    </div>
 
                    <div>
                        <ul class="mp-0 product-mine">
-                           @foreach($products as $product_mine)
-                               <li class=" mb-3" style="position: relative">
-                                   <a class="row" href="{{route('product.show',  $product_mine->id )}}">
-                                       <div class="col-sm-4">
-                                           <img class="img-fluid" src="  {{$product_mine->getImages()[0]}}" >
-                                       </div>
-                                       <div class="col-sm-8">
-                                           <div class="mine-title text-uppercase"  style="color: black">{{$product_mine->title}}</div>
-                                           <div class="text-muted">{{$product_mine->getPrice($product_mine->price, $product_mine->discounts).'.руб'}}</div>
-                                       </div>
-                                   </a>
-                                   <a class="mine-star" >
-                                       <i class="fa fa-star-o fa-2x" aria-hidden="true" style="position: absolute; left: 5px; top: 10px;  color: white;"></i>
-                                   </a>
-                               </li>
-                           @endforeach
-                           {{$products->links()}}
+                           @include('ajax.AjaxProductsMine')
                        </ul>
                    </div>
 
@@ -151,27 +140,32 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class="" action="/share" method="post">
+                        {{csrf_field()}}
+                        <input type="hidden" name="product_id" value="{{$product->id}}">
                         <div class="form-group">
                             <label class="col-form-label">Ваш email:</label>
-                            <input type="text" class="form-control" >
+                            <input type="text" name="email" class="form-control" >
                         </div>
 
                         <div class="form-group">
                             <label class="col-form-label">Имя друга:</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="name_friend" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label class="col-form-label">email друга:</label>
-                            <input type="text" class="form-control" >
+                            <input type="text" name="email_friend" class="form-control" >
                         </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                            <button type="submit" class="btn btn-primary">Поделиться</button>
+                        </div>
+
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary">Поделиться</button>
-                </div>
+
             </div>
         </div>
     </div>

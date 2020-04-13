@@ -2,7 +2,7 @@
 <li class=" mb-3" style="position: relative">
     <a class="row" href="{{route('product.show',  $product_mine->id )}}">
         <div class="col-sm-4">
-            <img class="img-fluid" src="  {{$product_mine->getImages()[1]}}" >
+            <img class="img-fluid" src="  {{$product_mine->getImages()[0]}}" >
         </div>
         <div class="col-sm-8">
             <div class="mine-title text-uppercase"  style="color: black">{{$product_mine->title}}</div>

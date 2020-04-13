@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -27,6 +28,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function favorites() {
+        return $this->belongsToMany(
+            Product::class,
+            'favorites',
+            'user_id',
+            'product_id'
+        );
+    }
 
     public function shop()
     {
@@ -56,4 +66,19 @@ class User extends Authenticatable
      public function getfullname () {
        return $this->surname.' '. $this->name.' '.$this->patronymic;
      }
+
+     public function checkDuplReservation ($productId) {
+       return Reservation::where([
+             ['user_id', '=', Auth::user()->id],
+             ['product_id', '=', $productId]
+         ])->exists();
+     }
+
+    public function checkDuplFavorites ($productId) {
+        return Favorite::where([
+            ['user_id', '=', Auth::user()->id],
+            ['product_id', '=', $productId]
+        ])->exists();
+    }
+
 }

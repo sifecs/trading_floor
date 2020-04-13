@@ -62,4 +62,14 @@ class shopsControler extends Controller
         return redirect()->back()->with('status', 'Ваш магазин успешно удалён');
     }
 
+    public function shopSetPrivileges(Request $request){
+        $shop = Auth::user()->shop;
+        if ($shop) {
+            $shop->privilege_id = $request->get('idPrivileges');
+            $shop->save();
+            $privilegeClass = $shop->privilege->class;
+            return $privilegeClass;
+        }
+    }
+
 }

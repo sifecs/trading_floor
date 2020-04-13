@@ -12,9 +12,24 @@ class Product extends Model
     protected $fillable = [
         'title', 'price', 'discounts','description', 'category_id',
     ];
+
+    public function privilege(){
+        return $this->belongsTo(privilege::class);
+    }
+
+    public function reservation() {
+        return $this->belongsToMany(
+            User::class,
+            'reservation',
+            'product_id',
+            'user_id'
+        );
+    }
+
     public function comments () {
         return $this->hasMany(coments::class,'product_id');
     }
+
     public function author () {
         return $this->belongsTo(User::class,'user_id');
     }
@@ -72,6 +87,10 @@ class Product extends Model
         }
         $this->removeImages();
         return $this->delete();
+    }
+
+    public function getReservationUser($id){
+        return User::find($id);
     }
 
 

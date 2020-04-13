@@ -22,7 +22,8 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('category_id')->nullable();
-            $table->integer('shop_id');
+            $table->integer('shop_id')->nullable();
+            $table->integer('privilege_id')->default(1);
             $table->timestamps();
         });
     }

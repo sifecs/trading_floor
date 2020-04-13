@@ -20,13 +20,12 @@ class CreateUsersTable extends Migration
             $table->string('surname')->nullable();
             $table->string('phone')->nullable();
             $table->string('email');
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->integer('is_admin')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
