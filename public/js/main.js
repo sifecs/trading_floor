@@ -69,6 +69,12 @@ $(document).on('click','.product-mine .pagination a', function (e) {
     getAjaxData(page,'/ajax/Products','.product-mine')
 });
 
+$(document).on('click','.product_favorite .pagination a', function (e) {
+    e.preventDefault();
+    let page = $(this).attr('href').split('page=')[1];
+    getAjaxData(page,'/ajax/ProductsFavorite','.product_favorite')
+});
+
 $(document).on('click','#products-reservation .pagination a', function (e) {
     e.preventDefault();
     let page = $(this).attr('href').split('page=')[1];
@@ -219,7 +225,6 @@ $(document).on('click','.search .pagination a', function (e) {
             $('.search').html(data);
         });
 });
-
 
 function getAjaxData (page, url, element) {
     $.ajax({

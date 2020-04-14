@@ -82,14 +82,23 @@ class Product extends Model
 
     public function removeProduct (){
         $coments = $this->comments()->get();
-        foreach ($this->reservation as $reservation) {
+
+        $favarites =  Favorite::where([
+            ['product_id', '=', $this->id]
+        ])->get();
+
+         foreach ($favarites as $favarite) {
+             $favarite->delete();
+         }
+
+         foreach ($this->reservation as $reservation) {
             $reservation->pivot->delete();
-        }
-        foreach ($coments as $coment) {
-           $coment->delete();
-        }
-        $this->removeImages();
-        return $this->delete();
+         }
+         foreach ($coments as $coment) {
+             $coment->delete();
+         }
+         $this->removeImages();
+         return $this->delete();
     }
 
     public function getReservationUser($id){

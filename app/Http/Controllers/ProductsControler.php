@@ -100,7 +100,6 @@ class ProductsControler extends Controller
         }
     }
 
-
     public function share(Request $request){
         $this->validate($request, [
             'email' => ['required','email'],
