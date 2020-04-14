@@ -14,14 +14,14 @@ class shopsControler extends Controller
     }
 
     public function shop ($id) {
-        $shop = Shops::find($id);
+        $shop = Shops::where('id',$id)->firstOrFail();
         $products = $shop->products()->paginate(1);
         return view('pages.shop',['shop' => $shop, 'products' => $products]);
     }
 
     public function addShop(Request $request) {
         $this->validate($request,[
-            'name'=> 'required',
+            'name'=>'required|unique:shops',
             'address'=> 'required',
             'description'=> 'required',
             'img'=> 'required|image',
@@ -56,10 +56,17 @@ class shopsControler extends Controller
     }
 
     public function removeShop(Request $request) {
-        $shop = Auth::user()->shop;
-        $shop->removeImages();
-        $shop->delete();
-        return redirect()->back()->with('status', 'Ваш магазин успешно удалён');
+        $user = Auth::user();
+        $shop = $user->shop;
+        if ($shop != null ){
+            foreach ($shop->products as $product) {
+                $product->removeProduct();
+            }
+            $shop->removeImages();
+            $shop->delete();
+            return redirect()->back()->with('status', 'Ваш магазин успешно удалён');
+        }
+        return 'Тут пусто';
     }
 
     public function shopSetPrivileges(Request $request){

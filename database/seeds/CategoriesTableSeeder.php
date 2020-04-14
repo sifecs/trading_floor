@@ -13,13 +13,13 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'title' => 'Стрела',
+            'title' => 'Техника',
             '_lft' => '1',
             '_rgt' => '4',
             'parent_id' => null,
         ]);
         DB::table('categories')->insert([
-            'title' => 'Стрела_Дочка',
+            'title' => 'техника_Дочка_1',
             '_lft' => '2',
             '_rgt' => '3',
             'parent_id' => '1',

@@ -2,7 +2,10 @@
 
 @section('content')
 
-<div class="wrapper my-4 px-2">
+{{--    @include('livewire.search')--}}
+{{--        @livewire('hello-world')--}}
+{{--<livewire:hello-world>--}}
+    <div class="wrapper my-4 px-2">
     <div class=" row justify-content-center mp-0">
         <div class="" style="max-width: 700px; position: relative">
 

@@ -25,9 +25,9 @@ class CategoriesController extends Controller
     }
 
     public function store (Request $request) {
-//        dd($request->ajax());
         $this->validate($request,[
             'title' =>'required',
+            'img' =>'nullable|image',
         ]);
 
         $parent_id = Category::find($request->get('parent_id'));
@@ -37,7 +37,9 @@ class CategoriesController extends Controller
         } else {
             $all = $request->all();
         }
+
         $category = Category::create($all, $parent_id);
+        $category->uploadImg($request->file('img'));
         return redirect()->route('categories.index');
     }
 
@@ -49,14 +51,18 @@ class CategoriesController extends Controller
     public  function update(Request $request, $id) {
         $this->validate($request,[
             'title' =>'required',
+            'img' =>'nullable|image',
         ]);
         $category = Category::find($id);
         $category->update($request->all());
+        $category->uploadImg($request->file('img'));
         return redirect()->route('categories.index');
     }
 
     public function destroy($id) {
-        Category::find($id)->delete();
+        $Category = Category::find($id);
+        $Category->removeImages();
+        $Category->delete();
         return redirect()->route('categories.index');
     }
     use NodeTrait;

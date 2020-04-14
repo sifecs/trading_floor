@@ -114,10 +114,8 @@
                         <i class="fa fa-dashboard"></i> <span>Админ-панель</span>
                     </a>
                 </li>
-                <li><a href="{{route('finance.index')}}"><i class="fa fa-sticky-note-o"></i> <span>Финансы</span></a></li>
                 <li><a href="{{route('categories.index')}}"><i class="fa fa-list-ul"></i> <span>Категории</span></a></li>
-                <li><a href="{{route('currencies.index')}}"><i class="fa fa-tags"></i> <span>Валюты</span></a></li>
-                <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
+
             </ul>
 
         </section>

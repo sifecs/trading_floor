@@ -80,8 +80,11 @@ class Product extends Model
         return $this->comments()->paginate(4);
     }
 
-    public function removeProductAndcoments (){
+    public function removeProduct (){
         $coments = $this->comments()->get();
+        foreach ($this->reservation as $reservation) {
+            $reservation->pivot->delete();
+        }
         foreach ($coments as $coment) {
            $coment->delete();
         }

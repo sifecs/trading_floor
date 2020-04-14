@@ -15,6 +15,7 @@
             <div class="box">
                 {{Form::open([
                  'route' => 'categories.store',
+                 'files'=>true
                ])}}
                 <div class="box-header with-border">
                     <h3 class="box-title">Добавление категории</h3>
@@ -22,6 +23,13 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Лицевая картинка</label>
+                            <input type="file" name="img" id="exampleInputFile">
+                            <p class="help-block">Какое-нибудь уведомление о форматах..</p>
+                        </div>
+
                         <div class="form-group">
                             <label for="exampleInputEmail1">Название</label>
                             <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="">
@@ -41,7 +49,7 @@
                     <a href="{{route('categories.index')}}" class="btn btn-default">Назад</a>
                     <button class="btn btn-success pull-right">Добавить</button>
                 </div>
-                
+
                 {!! Form::close() !!}
 
             </div>

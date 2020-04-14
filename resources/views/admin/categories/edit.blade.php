@@ -20,9 +20,17 @@
                 <div class="box-body">
                     {{Form::open([
                      'route'=>['categories.update',$category->id],
-                     'method'=>'put'
+                     'method'=>'put',
+                     'files'=>true
                     ])}}
                     <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Лицевая картинка</label>
+                            <input type="file" name="img" id="exampleInputFile">
+                            <p class="help-block">Какое-нибудь уведомление о форматах..</p>
+                        </div>
+
                         <div class="form-group">
                             <label for="exampleInputEmail1">Название</label>
                             <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$category->title}}">

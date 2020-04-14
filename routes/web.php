@@ -20,16 +20,18 @@ Route::get('/products', 'ProductsControler@list')->name('products.list');
 Route::get('/shops', 'shopsControler@list')->name('shops.list');
 Route::get('/shop/{id}', 'shopsControler@shop')->name('shop');
 Route::get('/products/category/{id}', 'ProductsControler@productsCategory')->name('category.list');
-
-
-
 Route::post('/share', 'ProductsControler@share');
 
+
+Route::get('search', 'searchControler@result')->name('search.result');
 
 Route::group(['prefix'=>'ajax'], function (){
     Route::get('Products', 'ProductsControler@ajaxProducts');
     Route::get('paginate', 'ProductsControler@getAjaxPaginate');
     Route::get('Coments/{id}', 'ProductsControler@ajaxComents');
+
+    Route::get('search', 'searchControler@resultAjax');
+
     Route::group(['middleware' =>'auth'], function (){
         Route::get('userShopProducts', 'ProductsControler@AjaxUserShopProducts');
         Route::get('productReservation', 'ProductsControler@ajaxProductReservation');
@@ -67,11 +69,8 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('/favorites', 'favoriteControler@list')->name('favorite.list');
 });
 
-Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
+Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware' =>'admin'], function (){
     Route::get('/', 'DashboardController@index');
     Route::resource('/categories', 'CategoriesController');
-    Route::resource('/currencies', 'CurrenciesController');
-    Route::resource('/users', 'UsersController');
-    Route::resource('/finance', 'FinanceController');
 });
 

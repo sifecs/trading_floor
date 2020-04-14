@@ -15,7 +15,7 @@ class ProductsControler extends Controller
 {
     public function show ($id) {
        $products = Product::paginate(1);
-       $product = Product::find($id);
+       $product = Product::where('id',$id)->firstOrFail();
 
         return view('pages.productCart',['product' => $product, 'products' => $products]);
     }
@@ -51,17 +51,14 @@ class ProductsControler extends Controller
         if ($shop != null ){
             $product = $shop->products->find($request->get('idProduct'));
             $productId = $product->id;
-            foreach ($product->reservation as $reservation) {
-                $reservation->pivot->delete();
-            }
-            $product->removeProductAndcoments();
+            $product->removeProduct();
             return $productId;
         }
         return 'Тут пусто';
     }
 
     public function productsCategory ($id) {
-        $products = Category::find($id)->products()->paginate(1);
+        $products = Category::where('id',$id)->firstOrFail()->products()->paginate(1);
         return view('pages.products',['products' => $products]);
     }
 

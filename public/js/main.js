@@ -69,12 +69,6 @@ $(document).on('click','.product-mine .pagination a', function (e) {
     getAjaxData(page,'/ajax/Products','.product-mine')
 });
 
-$(document).on('click','.product_favorite .pagination a', function (e) {
-    e.preventDefault();
-    let page = $(this).attr('href').split('page=')[1];
-    getAjaxData(page,'/ajax/ProductsFavorite','.product_favorite')
-});
-
 $(document).on('click','#products-reservation .pagination a', function (e) {
     e.preventDefault();
     let page = $(this).attr('href').split('page=')[1];
@@ -197,6 +191,35 @@ $(document).on('click', '.remove-favorite', function (e) {
             });
     }
 });
+
+
+$(document).on('click','.search .pagination a', function (e) {
+    e.preventDefault();
+    let page = $(this).attr('href').split('page=')[1];
+
+    var params = window
+        .location
+        .search
+        .replace('?','')
+        .split('&')
+        .reduce(
+            function(p,e){
+                var a = e.split('=');
+                p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+                return p;
+            },
+            {}
+        );
+
+    $.ajax({
+        url: `/ajax/search/?textSearch=${params.textSearch}&page=${page}`,
+    })
+        .done(function( data ) {
+            // console.log(data)
+            $('.search').html(data);
+        });
+});
+
 
 function getAjaxData (page, url, element) {
     $.ajax({

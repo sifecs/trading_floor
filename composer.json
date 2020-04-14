@@ -15,7 +15,8 @@
         "kalnoy/nestedset": "^5.0",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "laravelcollective/html": "^6.1"
+        "laravelcollective/html": "^6.1",
+        "livewire/livewire": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -31,7 +32,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "livewire/livewire"
+            ]
         }
     },
     "autoload": {

@@ -24,6 +24,7 @@
                         <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Картинка</th>
                             <th>Название</th>
                             <th>Действия</th>
                         </tr>
@@ -32,8 +33,8 @@
                         @foreach($categorie as $category)
                             <tr>
                                 <td>{{$category->id}}</td>
+                                <td ><img class="img-fluid"  style="width: 65px; height:55px; object-fit: cover;" src="/{{$category->getImage()}}"> </td>
                                 <td >{{$category->title}}</td>
-
                                 <td>
                                     <a href="{{route('categories.edit',$category->id)}}" class="fa fa-pencil"></a>
                                     {{Form::open(['route'=>['categories.destroy', $category->id], 'method'=>'delete'])}}

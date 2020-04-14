@@ -23,7 +23,7 @@
 
 
     <meta http-equiv="Cache-Control" content="no-cache">
-
+    @livewireStyles
 </head>
 
 <body>
@@ -67,8 +67,8 @@
         </li>
 
     </ul>
-    <form class="form-inline mt-3 pb-3 d-flex justify-content-center flex-nowrap">
-        <input class=" w-75 form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search">
+    <form action="search" method="get" class="form-inline mt-3 pb-3 d-flex justify-content-center flex-nowrap">
+        <input class=" w-75 form-control mr-sm-4" id="search" type="text" placeholder="Search" name="textSearch" aria-label="Search">
         <button class="btn btn-outline-success px-5" type="submit">Search</button>
     </form>
 </nav>
@@ -140,7 +140,8 @@
 
 <script src="https://use.fontawesome.com/06e2747a57.js"></script>
 
-
-</body>
+{{--@livewire('hello-world')--}}
+{{--@include('livewire.hello-world')--}}
+<livewire:scripts>
 </body>
 </html>
