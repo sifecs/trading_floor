@@ -56,6 +56,43 @@
                 @if(!$user->shop)
                 <div class="my-2"> <span class="btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#add-shop">Создать магазин?</span></div>
                 @endif
+
+                @if($user->shop)
+                <div class="my-2">
+                        <span class="btn-styles px-2 text-uppercase my-2" data-toggle="collapse" data-target="#Chats" aria-expanded="false"
+                              aria-controls="Chats">Сообщинии</span>
+                </div>
+
+                <div id="accordion">
+                    <div id="Chats" class="collapse" aria-labelledby="Chats" data-parent="#accordion">
+
+                        <ul class="" >
+                            @foreach ($messageToUser as $key => $messageToUserGroup )
+                                <li data="{{$messageToUserGroup->first()->id}}">
+                                    {{\App\User::find( $key )->name ?? 'Не авторизированые'}}
+                                    <ul>
+                                        @foreach ($messageToUserGroup as $a => $message)
+                                            <li data="{{$message->id}}">
+                                                <div>Номер: {{ $message->phone}}</div>
+                                                <div>Текс: {{ $message->text}}</div>
+                                                @if($key == 'null')
+                                                    <span class="btn-styles px-2 text-uppercase my-2 remove_message">Удалить</span>
+                                                @endif
+                                                <hr>
+                                            </li>
+
+                                        @endforeach
+                                    </ul>
+                                    @if($key != 'null')
+                                        <span class="btn-styles px-2 text-uppercase my-2 remove_message">Удалить</span>
+                                    @endif
+                                </li>
+                           @endforeach
+                        </ul>
+
+                    </div>
+                </div>
+                @endif
             </div>
 
             <div class="my-3"><a href="{{route('loguot')}}" class="text-danger">Выйти</a></div>

@@ -67,7 +67,7 @@
         </li>
 
     </ul>
-    <form action="search" method="get" class="form-inline mt-3 pb-3 d-flex justify-content-center flex-nowrap">
+    <form action="/search" method="get" class="form-inline mt-3 pb-3 d-flex justify-content-center flex-nowrap">
         <input class=" w-75 form-control mr-sm-4" id="search" type="text" placeholder="Search" name="textSearch" aria-label="Search">
         <button class="btn btn-outline-success px-5" type="submit">Search</button>
     </form>

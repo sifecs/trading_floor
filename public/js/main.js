@@ -182,6 +182,25 @@ $(document).on('click', '.delete-product', function (e) {
     }
 });
 
+
+$(document).on('click', '.remove_message', function (e) {
+    e.preventDefault();
+    let idMessage = $(this).parent().attr('data');
+    if (confirm('Вы диствительно хотите удалить данное сообщение?')) {
+        postAjaxData({'idMessage': idMessage}, '/ajax/messageRemove')
+            .done(function (data) {
+                $(e.target).parent().remove();
+                console.log(data);
+            })
+            .fail(function (jqXHR) {
+                console.log('ошибка');
+                console.log(jqXHR);
+            });
+    }
+});
+
+
+
 $(document).on('click', '.remove-favorite', function (e) {
     e.preventDefault();
     let idProduct = $(this).attr('data');
@@ -197,7 +216,6 @@ $(document).on('click', '.remove-favorite', function (e) {
             });
     }
 });
-
 
 $(document).on('click','.search .pagination a', function (e) {
     e.preventDefault();
@@ -282,3 +300,22 @@ $("#updata-img").change(function(e) {
 });
 
 
+// let socket = new WebSocket("ws://hardproject");
+//
+// socket.onopen = function() {
+//     alert("Соединение установлено.");
+// };
+//
+// socket.onerror = function(error) {
+//     console.log("Ошибка ");
+//     console.log(error);
+// };
+//
+// socket.onclose = function(event) {
+//     console.log("Cоединение закрыто ");
+// };
+//
+// socket.onmessage = function(event) {
+//     console.log("Получены данные " + JSON.parse( event.data ));
+// };
+//

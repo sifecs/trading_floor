@@ -61,13 +61,13 @@
                            <li> {{$product->shop->user->getfullname()}} </li>
                            <li> {{$product->shop->user->phone}} </li>
                        </ul>
-                       <div class="my-2"><span class="hover btn-styles px-2 text-uppercase">Написать сообщение продавцу</span> </div>
+                       <div class="my-2"><span class="hover btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#chat">Написать сообщение продавцу</span> </div>
                        <a href="{{route('shop', $product->shop_id)}}" class="my-2 hover"><span class="hover btn-styles px-2 text-uppercase">К магазину продавцу</span> </a>
                         @if( Auth::check() && !Auth::user()->checkDuplFavorites($product->id) )
                         <div class="my-2"><span class="hover btn-styles px-2 text-uppercase add-favorites {{$product->id}}" data="{{$product->id}}">Добавить в избранное</span> </div>
                         @endif
-                       <div class="my-2" data-toggle="modal" data-target="#share"><span class="hover btn-styles px-2 text-uppercase">Поделиться</span> </div>
-                       <div class="my-2" data-toggle="modal" data-target="#comments"><span class="hover btn-styles px-2 text-uppercase">Коментарии</span> </div>
+                       <div class="my-2"><span class="hover btn-styles px-2 text-uppercase" data-toggle="modal" data-target="#share">Поделиться</span> </div>
+                       <div class="my-2"><span class="hover btn-styles px-2 text-uppercase"  data-toggle="modal" data-target="#comments">Коментарии</span> </div>
                    </div>
 
                    <div>
@@ -81,8 +81,49 @@
        </div>
     </div>
 
+    <!--Modal Chat -->
+    <div class="modal fade" id="chat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Написать сообщение продвацу</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="" action="/chat" method="post">
+                        {{csrf_field()}}
+                        <input type="hidden" name="product_id" value="{{$product->id}}">
 
 
+<!--                        --><?php
+//                        dd(boolval( Auth::user()->phone));
+//                        ?>
+
+                        @if(!boolval( Auth::user()->phone ?? false ) )
+                        <div class="form-group">
+                            <label class="col-form-label">Ваш телефон</label>
+                            <input class="form-control" type="text" name="phone" value="{{Auth::user()->phone ?? ''}}">
+                        </div>
+                        @endif
+
+                        <div class="form-group">
+                            <label class="col-form-label">Текс</label>
+                            <textarea type="text" name="text" class="form-control"> </textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <!-- Modal коментарии -->
     <div class="modal fade" id="comments" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -103,6 +144,7 @@
                         @endforeach
                             {{$product->getComments()->links()}}
                     </ul>
+                    @if(Auth::check())
                     <div class="collapse" id="createComents">
                         <div class="card card-body">
                             <div class="error text-danger"></div>
@@ -119,10 +161,12 @@
                             </form>
                         </div>
                 </div>
+                    @endif
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    @if(Auth::check())
                     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#createComents" >Оставить коментарий</button>
-
+                    @endif
                     </div>
                 </div>
             </div>

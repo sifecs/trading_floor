@@ -23,7 +23,6 @@
 {{-- $Reservation->getReservationUser($Reservation->pivot->user_id)->getfullname() Реализация просто ужасная знаю но я просидел часов 8 не чего лучше не придумал   --}}
             <div class="text-muted "> {{$Reservation->getReservationUser($Reservation->pivot->user_id)->getfullname()}} </div>
             <div class="text-muted mb-2"> {{$Reservation->getReservationUser($Reservation->pivot->user_id)->phone}} </div>
-            <span class="btn-styles px-2 text-uppercase" >Написать сообщение покупателю</span>
         </div>
     </li>
 @endforeach

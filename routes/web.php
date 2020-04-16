@@ -21,9 +21,10 @@ Route::get('/shops', 'shopsControler@list')->name('shops.list');
 Route::get('/shop/{id}', 'shopsControler@shop')->name('shop');
 Route::get('/products/category/{id}', 'ProductsControler@productsCategory')->name('category.list');
 Route::post('/share', 'ProductsControler@share');
-
-
 Route::get('search', 'searchControler@result')->name('search.result');
+
+Route::post('/chat', 'chatControler@chat');
+
 
 Route::group(['prefix'=>'ajax'], function (){
     Route::get('Products', 'ProductsControler@ajaxProducts');
@@ -46,6 +47,7 @@ Route::group(['prefix'=>'ajax'], function (){
         Route::get('ProductsFavorite', 'favoriteControler@ajaxProductsFavorite');
         Route::Post('favoriteAdd', 'favoriteControler@ajaxAddFavorite');
         Route::Post('favoriteRemove', 'favoriteControler@ajaxRemoveFavorite');
+        Route::Post('messageRemove', 'chatControler@ajaxRemoveMessage');
     });
 
 });
@@ -65,8 +67,8 @@ Route::group(['middleware' =>'auth'], function (){
     Route::delete('/removeShop', 'shopsControler@removeShop');
     Route::post('/coment', 'ComentsControler@store');
     Route::post('/addProduct', 'ProductsControler@AddProduct');
-
     Route::get('/favorites', 'favoriteControler@list')->name('favorite.list');
+
 });
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware' =>'admin'], function (){

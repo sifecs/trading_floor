@@ -29,6 +29,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function message () {
+        return $this->hasMany(chat::class,'user_id');
+    }
+
+    public function messageToUser () {
+        return $this->hasMany(chat::class,'messageToUser_id');
+    }
+
     public function favorites() {
         return $this->belongsToMany(
             Product::class,
